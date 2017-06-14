@@ -7,10 +7,10 @@ type NonlinearModel <: Model
     j::Function
     g::Function
     q::Matrix
-    function NonlinearModel(f::Function,g::Function,q::Matrix)
-        j = forwarddiff_jacobian(f,Float64,fadtype=:typed)
-        new(f,j,g,q)
-    end
+#    function NonlinearModel(f::Function,g::Function,q::Matrix)
+#        j = forwarddiff_jacobian(f,Float64,fadtype=:typed)
+#        new(f,j,g,q)
+#    end
 end
 
 function ap(f::NonlinearModel,x::State)

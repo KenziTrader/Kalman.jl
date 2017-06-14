@@ -16,6 +16,7 @@ end
 
 function update!(kf::KalmanFilter,y::Observation)
     (res,ph,s) = covs(kf,y)
+	handleMissingMeasurements!(y, res, ph, s)
     xn = kf.x.x + ph * (s\res)
     pn = kf.x.p - ph * (s'\ph')
     
@@ -34,4 +35,24 @@ end
 
 function predictupdate!(kf::KalmanFilter,y::Observation)
     update!(predict!(kf),y)
+end
+
+
+function handleMissingMeasurements!(y::Observation,
+									res::Vector, ph::Matrix, s::Matrix)
+	nm = length(y.y)
+	ndim = size(ph, 1)
+    for j=1:nm
+    	if y.y[j]==0 || isnan(y.y[j])
+    		res[j] = 0
+			for k=1:nm
+				s[j, k] = 0
+				s[k, j] = 0
+			end
+			s[j, j] = 1
+			for i=1:ndim
+				ph[i, j] = 0
+			end
+    	end
+    end
 end

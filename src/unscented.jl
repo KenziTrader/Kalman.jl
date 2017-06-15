@@ -1,8 +1,8 @@
 #######
 # Unscented Kalman filter types and filtering interface
 
-abstract UnscentedKalmanFilter <: KalmanFilter
-abstract AbstractUnscentedState <: AbstractState
+abstract type UnscentedKalmanFilter<:KalmanFilter end
+abstract type AbstractUnscentedState<:AbstractState end
 
 type UnscentedState{T} <: AbstractUnscentedState
     x::Vector{T}

@@ -1,12 +1,12 @@
-abstract KalmanFilter
+abstract type KalmanFilter end
 
-abstract LinearKalmanFilter <: KalmanFilter
+abstract type LinearKalmanFilter<:KalmanFilter end
 
-abstract Model
+abstract type Model end
 
-abstract ObservationModel
+abstract type ObservationModel end
 
-abstract AbstractState
+abstract type AbstractState end
 
 type State{T} <: AbstractState
     x::Vector{T}

@@ -1,6 +1,6 @@
 using ForwardDiff
 
-abstract ExtendedKalmanFilter <: KalmanFilter
+abstract type ExtendedKalmanFilter<:KalmanFilter end
 
 type NonlinearModel <: Model
     f::Function

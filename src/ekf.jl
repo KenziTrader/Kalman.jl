@@ -29,6 +29,9 @@ type NonlinearObservationModel <: ObservationModel
         j = forwarddiff_jacobian(h,Float64,fadtype=:typed)
         new(h,j,r)
     end
+    function NonlinearObservationModel(h::Function,j::Function,r::Matrix)
+        new(h,j,r)
+    end
 end
 
 type BasicExtendedKalmanFilter <: ExtendedKalmanFilter

@@ -47,7 +47,8 @@ function covs(kf::BasicExtendedKalmanFilter,y::Observation)
     res = y.y - kf.z.h(kf.x.x)
     H = kf.z.j(kf.x.x)'
     ph = kf.x.p * H'
-    s = H * kf.x.p * H' + kf.z.r
+#    s = H * kf.x.p * H' + kf.z.r
+    s = H * ph + kf.z.r
     (res,ph,s)
 end
 

@@ -3,14 +3,17 @@ using ForwardDiff
 abstract type ExtendedKalmanFilter<:KalmanFilter end
 
 type NonlinearModel <: Model
-    f::Function
-    j::Function
-    g::Function
-    q::Matrix
-#    function NonlinearModel(f::Function,g::Function,q::Matrix)
-#        j = forwarddiff_jacobian(f,Float64,fadtype=:typed)
-#        new(f,j,g,q)
-#    end
+	f::Function
+	j::Function
+	g::Function
+	q::Matrix
+	function NonlinearModel(f::Function,g::Function,q::Matrix)
+		j = forwarddiff_jacobian(f,Float64,fadtype=:typed)
+		new(f,j,g,q)
+	end
+	function NonlinearModel(f::Function,j::Function,g::Function,q::Matrix)
+		new(f,j,g,q)
+	end
 end
 
 function ap(f::NonlinearModel,x::State)

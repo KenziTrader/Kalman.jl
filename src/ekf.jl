@@ -2,7 +2,7 @@ using ForwardDiff
 
 abstract type ExtendedKalmanFilter<:KalmanFilter end
 
-type NonlinearModel <: Model
+struct NonlinearModel <: Model
 	f::Function
 	j::Function
 	g::Function

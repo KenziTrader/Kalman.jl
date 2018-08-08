@@ -1,10 +1,10 @@
 #######
 # Unscented Kalman filter types and filtering interface
 
-abstract type UnscentedKalmanFilter<:KalmanFilter end
-abstract type AbstractUnscentedState<:AbstractState end
+abstract struct UnscentedKalmanFilter<:KalmanFilter end
+abstract struct AbstractUnscentedState<:AbstractState end
 
-type UnscentedState{T} <: AbstractUnscentedState
+struct UnscentedState{T} <: AbstractUnscentedState
     x::Vector{T}
     p::Matrix
     α::Real
@@ -12,12 +12,12 @@ type UnscentedState{T} <: AbstractUnscentedState
     κ::Real
 end
 
-type AdditiveUnscentedObservationModel <: ObservationModel
+struct AdditiveUnscentedObservationModel <: ObservationModel
     h::Function
     r::Matrix
 end
 
-type AdditiveUnscentedModel <: Model
+struct AdditiveUnscentedModel <: Model
     f::Function
     q::Matrix
 end

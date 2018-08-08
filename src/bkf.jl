@@ -1,21 +1,21 @@
-abstract type KalmanFilter end
+abstract struct KalmanFilter end
 
-abstract type LinearKalmanFilter<:KalmanFilter end
+abstract struct LinearKalmanFilter<:KalmanFilter end
 
-abstract type Model end
+abstract struct Model end
 
-abstract type ObservationModel end
+abstract struct ObservationModel end
 
-abstract type AbstractState end
+abstract struct AbstractState end
 
-type State{T} <: AbstractState
+struct State{T} <: AbstractState
     x::Vector{T}
     p::Matrix
 end
 
 Base.:(==)(x1::State,x2::State) = x1.x==x2.x && x1.p == x2.p
 
-type LinearModel <: Model
+struct LinearModel <: Model
     a::Matrix
     g::Matrix
     q::Matrix

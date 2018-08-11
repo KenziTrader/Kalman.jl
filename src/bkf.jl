@@ -1,12 +1,12 @@
-abstract struct KalmanFilter end
+abstract type KalmanFilter end
 
-abstract struct LinearKalmanFilter<:KalmanFilter end
+abstract type LinearKalmanFilter<:KalmanFilter end
 
-abstract struct Model end
+abstract type Model end
 
-abstract struct ObservationModel end
+abstract type ObservationModel end
 
-abstract struct AbstractState end
+abstract type AbstractState end
 
 struct State{T} <: AbstractState
     x::Vector{T}
@@ -31,18 +31,18 @@ function ap(f::LinearModel,x::State)
     State(x1,p1)
 end
 
-type Observation{T}
+struct Observation{T}
     y::Vector{T}
 end
 
 Base.convert(::Type{Observation},y) = Observation([y])
 
-type LinearObservationModel <: ObservationModel
+struct LinearObservationModel <: ObservationModel
     h::Matrix
     r::Matrix
 end
 
-type BasicKalmanFilter <: LinearKalmanFilter
+struct BasicKalmanFilter <: LinearKalmanFilter
     x::State
     f::LinearModel
     z::LinearObservationModel

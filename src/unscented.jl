@@ -1,8 +1,8 @@
 #######
 # Unscented Kalman filter types and filtering interface
 
-abstract struct UnscentedKalmanFilter<:KalmanFilter end
-abstract struct AbstractUnscentedState<:AbstractState end
+abstract type UnscentedKalmanFilter<:KalmanFilter end
+abstract type AbstractUnscentedState<:AbstractState end
 
 struct UnscentedState{T} <: AbstractUnscentedState
     x::Vector{T}
@@ -40,7 +40,7 @@ function ap(f::AdditiveUnscentedModel,s::UnscentedState)
     UnscentedState(xn,pn,s.α,s.β,s.κ)
 end
 
-type AdditiveUnscentedKalmanFilter <: UnscentedKalmanFilter
+struct AdditiveUnscentedKalmanFilter <: UnscentedKalmanFilter
     x::UnscentedState
     f::AdditiveUnscentedModel
     z::AdditiveUnscentedObservationModel

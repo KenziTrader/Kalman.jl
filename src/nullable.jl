@@ -2,7 +2,7 @@
 
 using Nullables
 
-function update{T}(kf::KalmanFilter,y::Nullable{Vector{T}})
+function update(kf::KalmanFilter,y::Nullable{Vector{T}}) where T
     if isnull(y.y)
         return kf
     else
@@ -10,7 +10,7 @@ function update{T}(kf::KalmanFilter,y::Nullable{Vector{T}})
     end
 end
 
-function update!{T}(kf::KalmanFilter,y::Nullable{Vector{T}})
+function update!(kf::KalmanFilter,y::Nullable{Vector{T}}) where T
     if isnull(y)
         return kf
     else
@@ -19,10 +19,10 @@ function update!{T}(kf::KalmanFilter,y::Nullable{Vector{T}})
     end
 end
 
-function predictupdate{T}(kf::BasicKalmanFilter,y::Nullable{Vector{T}})
+function predictupdate(kf::BasicKalmanFilter,y::Nullable{Vector{T}}) where T
     update(predict(kf),y)
 end
 
-function predictupdate!{T}(kf::BasicKalmanFilter,y::Nullable{Vector{T}})
+function predictupdate!(kf::BasicKalmanFilter,y::Nullable{Vector{T}}) where T
     update!(predict!(kf),y)
 end

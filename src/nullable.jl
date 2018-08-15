@@ -1,28 +1,28 @@
 # Filters using Nullable types to represent missing measurements
 
-function update(kf::KalmanFilter,y::Union{Vector{T}, Nothing}) where T
-    if y.y == nothing
+using Nullables
+
+function update{T}(kf::KalmanFilter,y::Nullable{Vector{T}})
+    if isnull(y.y)
         return kf
     else
-        return update(kf,Observation(y))
+        return update(kf,Observation(get(y)))
     end
 end
 
-function update!(kf::KalmanFilter,y::Union{Vector{T}, Nothing}) where T
-    if y == nothing
+function update!{T}(kf::KalmanFilter,y::Nullable{Vector{T}})
+    if isnull(y)
         return kf
     else
-        update!(kf,Observation(y))
+        update!(kf,Observation(get(y)))
         return kf
     end
 end
 
-function predictupdate(kf::BasicKalmanFilter,y::Union{Vector{T}, Nothing}) where T
+function predictupdate{T}(kf::BasicKalmanFilter,y::Nullable{Vector{T}})
     update(predict(kf),y)
 end
 
-function predictupdate!(kf::BasicKalmanFilter,y::Union{Vector{T}, Nothing}) where T
+function predictupdate!{T}(kf::BasicKalmanFilter,y::Nullable{Vector{T}})
     update!(predict!(kf),y)
 end
-
-
